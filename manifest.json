@@ -1,0 +1,44 @@
+{
+    "applications": {
+        "gecko": {
+          "id": "virtuos86@clean.bookmarks",
+          "strict_min_version": "52.0"
+        }
+    },
+
+    "manifest_version": 2,
+    "name": "__MSG_name__",
+    "description": "__MSG_description__",
+    "version": "0.1.43",
+    "homepage_url": "https://github.com/virtuos86/ff-clean-bookmarks",
+    "icons": {
+        "32": "icons/icon_32.png",
+        "48": "icons/icon_48.png",
+        "64": "icons/icon_64.png",
+        "128": "icons/icon_128.png"
+    },
+
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "activeTab",
+        "bookmarks",
+        "storage"
+    ],
+
+    "background": {
+        "scripts": ["background-script.js"]
+    },
+
+    "browser_action": {
+        "default_icon": "icons/icon_32.png",
+        "default_title": "__MSG_bookmarks__",
+        "default_popup": "popup/popup.html"
+    },
+
+    "options_ui": {
+        "page": "settings/options.html"
+    },
+
+    "default_locale": "ru"
+}

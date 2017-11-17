@@ -1,0 +1,66 @@
+{
+    "bookmarks": {
+        "message": "Bookmarks",
+        "description": "Description for the button."
+    },
+
+    "description": {
+        "message": "Add a button to popup your bookmarks.",
+        "description": "Description of the extension."
+    },
+
+    "empty": {
+        "message": "...",
+        "description": "Label for an empty folder."
+    },
+
+    "name": {
+        "message": "Clean Bookmarks",
+        "description": "Name of the extension."
+    },
+
+    "notes": {
+        "message": "Notes",
+        "description": "Setting HTML text."
+    },
+
+    "open_in_new_tab": {
+        "message": "Open bookmarks in new tab",
+        "description": "Setting HTML text."
+    },
+
+    "open_wo_closing": {
+        "message": "Open tab without closing popup: Middle-click bookmark.",
+        "description": "Setting HTML text."
+    },
+
+    "popup_folder": {
+        "message": "Popup folder",
+        "description": "Setting HTML text."
+    },
+
+    "revert_css": {
+        "message": "Return to default style",
+        "description": "Setting HTML text."
+    },
+
+    "save_css": {
+        "message": "Save style",
+        "description": "Setting HTML text."
+    },
+
+    "settings": {
+        "message": "Settings",
+        "description": "Setting HTML text."
+    },
+
+    "style_textarea": {
+        "message": "Set custom CSS style for the popup menu",
+        "description": "Setting HTML text."
+    },
+
+    "update_favicon": {
+        "message": "Update favicon: Right-click bookmark.",
+        "description": "Setting HTML text."
+    }
+}

@@ -1,0 +1,37 @@
+h2 {
+	font-size: 16px; font-weight: normal;
+	margin: 0 0 4px 2px;
+}
+h3 {
+	font-size: 14px; font-weight: normal;
+	margin: 0 0 4px 2px;
+}
+article { 
+	font-size: 14px; color: #444;
+	padding: 0px; margin: 0px;
+	user-select: none; -moz-user-select: none; -webkit-user-select: none;
+}
+table {
+	border-collapse: collapse;
+}
+hr {
+	background-color: #eee;
+}
+.options td {
+	border: none;
+	padding: 6px 8px;
+}
+.options {
+	padding: 4px 8px 20px 8px;
+}
+.memo {
+	padding: 4px 16px;
+	line-height: 200%;
+}
+#topId {
+	max-width: 400px; padding-right: 10px;
+	display: none;
+}
+#folder_loading {
+	width: 20px; height: 20px; margin-top: 4px;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<h2>&lt;<span id="settings"></span>&gt;</h2>
+	<article>
+		<div class="options">
+			<table>
+				<tr>
+					<td>
+						<span id="popup_folder"></span>
+						<img id="folder_loading" src="../popup/imgs/spin.svg" alt="">
+						<select id="topId">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3 id="style-textarea"></h3><br />
+						<textarea rows="10" cols="80" id="css"></textarea><br />
+        				<input type="button" value="" id="revertCss" />
+        				<input type="button" value="" id="saveCss" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" id="newTab" value="" checked>
+						<label for="newTab"><span id="open_in_new_tab"></span></label>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<h2>&lt;<span id="notes"></span>&gt;</h2>
+		<div class="memo">
+			<span id="open_wo_closing"></span><br />
+			<span id="update_favicon"></span>
+		</div>
+	</article>
+	<script type="text/javascript" src="popup_css.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

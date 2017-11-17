@@ -1,0 +1,66 @@
+{
+    "bookmarks": {
+        "message": "Закладки",
+        "description": "Описание для кнопки в панели дополнений."
+    },
+
+    "description": {
+        "message": "Добавляет кнопку на панель дополнений, чтобы отображать в выпадающем списке ваши закладки.",
+        "description": "Описание дополнения."
+    },
+
+    "empty": {
+        "message": "...",
+        "description": "Строка, обозначающая пустую папку."
+    },
+
+    "name": {
+        "message": "Clean Bookmarks",
+        "description": "Название дополнения."
+    },
+
+    "notes": {
+        "message": "Примечания",
+        "description": "Настройки отображения закладок."
+    },
+
+    "open_in_new_tab": {
+        "message": "Открывать закладки в новой вкладке",
+        "description": "Настройки отображения закладок."
+    },
+
+    "open_wo_closing": {
+        "message": "Открыть закладку, на закрывая меню: клик колесом \"мыши\" на закладке.",
+        "description": "Настройки отображения закладок."
+    },
+
+    "popup_folder": {
+        "message": "Каталог, отображаемый при клике на кнопку:",
+        "description": "Настройки отображения закладок."
+    },
+
+    "revert_css": {
+        "message": "Вернуть дефолтный стиль",
+        "description": "Setting HTML text."
+    },
+
+    "save_css": {
+        "message": "Сохранить стиль",
+        "description": "Setting HTML text."
+    },
+
+    "settings": {
+        "message": "Настройки",
+        "description": "Настройки отображения закладок."
+    },
+
+    "style_textarea": {
+        "message": "Задать свой CSS стиль для выпадающего меню закладок",
+        "description": "Setting HTML text."
+    },
+
+    "update_favicon": {
+        "message": "Обновить иконку закладки: правый клик на закладке.",
+        "description": "Настройки отображения закладок."
+    }
+}
