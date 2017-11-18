@@ -7,6 +7,8 @@ html, body {
     background-color: #f2f2f2;
 }
 .panel {
+	width: fit-content;
+	height: fit-content;
     background-color: #efefef;
     position:absolute; top: 0; left: 0;
     font-size: 12px; padding: 0 0 0 0;
@@ -27,16 +29,17 @@ td * {
     vertical-align: middle;
 }
 td.arrow {
-    padding: 1px 1px 1px 1px;
+    padding: 1px 5px 1px 1px;
 }
 td.icon img {
     border: none; width: 14px; height: 14px;
     margin-top: -1px;
 }
+
 td.title span {
-    font: "DejaVu Sans", "Lucida Sans";
+    font-family: "Arial", sans;
     display: inline-block;
-    margin-right: 40px;
+    margin-right: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -45,17 +48,16 @@ td.title span {
     min-width: 125px;
 }
 tr:hover {
-    background-color: #ee0000;
+    background-color: #bbbbff20;
 }
 div.splitter {
-    width: calc(100% - 25px); height: 1px; background-color: #d7d7d7;
-    margin: 2px 0 2px 222px;
+    width: inherit; height: 1px; background-color: #d7d7d7;
+    margin: 0 0 0 0;
 }
 div.return_box {
-    position:fixed; left: 0px; width: 25px;
+    position:fixed; left: 0px; width: 20px;
     background-color: #fbfbfb; border: 0px solid #c0c0c0;
     border-left: none;
-    border-radius: 0 6px 6px 0;
 }
 div.return_box:hover {
     background-color: #badeff;

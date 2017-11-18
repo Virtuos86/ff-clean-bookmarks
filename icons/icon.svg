@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   data-name="Livello 1"
+   id="Livello_1"
+   viewBox="0 0 128 128"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="icon.svg">
+  <metadata
+     id="metadata11">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="968"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="89.596221"
+     inkscape:cy="-43.165111"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Livello_1" />
+  <title
+     id="title3" />
+  <path
+     d="M125.48,56.91a8.88,8.88,0,0,0-5-15L88.33,37a2.85,2.85,0,0,1-2.15-1.62L72,5.11a8.84,8.84,0,0,0-16,0L41.82,35.4A2.85,2.85,0,0,1,39.67,37L7.52,41.95a8.88,8.88,0,0,0-5,15l23.63,24.3a2.9,2.9,0,0,1,.78,2.47l-5.53,34a8.85,8.85,0,0,0,13,9.19l28.21-15.65a2.81,2.81,0,0,1,2.75,0h0l28.21,15.65a8.85,8.85,0,0,0,13-9.19l-5.53-34a2.89,2.89,0,0,1,.78-2.47ZM95.16,84.65l5.53,34a2.82,2.82,0,0,1-1.18,2.82,2.77,2.77,0,0,1-3,.16L68.29,106h0a8.78,8.78,0,0,0-8.57,0L31.51,121.63a2.78,2.78,0,0,1-3-.16,2.82,2.82,0,0,1-1.18-2.82l5.53-34A8.92,8.92,0,0,0,30.45,77L6.82,52.73a2.84,2.84,0,0,1-.66-2.93,2.79,2.79,0,0,1,2.27-1.92l32.15-4.93a8.84,8.84,0,0,0,6.67-5L61.42,7.65a2.84,2.84,0,0,1,5.16,0l14.17,30.3a8.84,8.84,0,0,0,6.68,5l32.15,4.93a2.79,2.79,0,0,1,2.27,1.92,2.84,2.84,0,0,1-.66,2.93L97.55,77A8.92,8.92,0,0,0,95.16,84.65Z"
+     id="path5"
+     style="fill:#393008;fill-opacity:1" />
+</svg>

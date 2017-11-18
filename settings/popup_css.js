@@ -7,6 +7,8 @@ let popup_css = 'html, body {\n\
     background-color: #f2f2f2;\n\
 }\n\
 .panel {\n\
+    width: fit-content;\n\
+    height: fit-content;\n\
     background-color: #efefef;\n\
     position:absolute; top: 0; left: 0;\n\
     font-size: 12px; padding: 0 0 0 0;\n\
@@ -27,16 +29,16 @@ td * {\n\
     vertical-align: middle;\n\
 }\n\
 td.arrow {\n\
-    padding: 1px 1px 1px 1px;\n\
+    padding: 1px 5px 1px 1px;\n\
 }\n\
 td.icon img {\n\
     border: none; width: 14px; height: 14px;\n\
     margin-top: -1px;\n\
 }\n\
 td.title span {\n\
-    font: "DejaVu Sans", "Lucida Sans";\n\
+    font-family: "Arial", sans;\n\
     display: inline-block;\n\
-    margin-right: 40px;\n\
+    margin-right: 5px;\n\
     white-space: nowrap;\n\
     overflow: hidden;\n\
     text-overflow: ellipsis;\n\
@@ -45,17 +47,16 @@ td.title span {\n\
     min-width: 125px;\n\
 }\n\
 tr:hover {\n\
-    background-color: #ee0000;\n\
+    background-color: #bbbbff20;\n\
 }\n\
 div.splitter {\n\
-    width: calc(100% - 25px); height: 1px; background-color: #d7d7d7;\n\
-    margin: 2px 0 2px 222px;\n\
+    width: inherit; height: 1px; background-color: #d7d7d7;\n\
+    margin: 0 0 0 0;\n\
 }\n\
 div.return_box {\n\
-    position:fixed; left: 0px; width: 25px;\n\
+    position:fixed; left: 0px; width: 20px;\n\
     background-color: #fbfbfb; border: 0px solid #c0c0c0;\n\
     border-left: none;\n\
-    border-radius: 0 6px 6px 0;\n\
 }\n\
 div.return_box:hover {\n\
     background-color: #badeff;\n\

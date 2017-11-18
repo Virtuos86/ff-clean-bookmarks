@@ -47,6 +47,10 @@ var escapeHtml = (function (String) {
 }(String));
 
 function createPanel(bid, parentId) {
+	style = document.createElement('style');
+    style.innerHTML = _pop_css;
+    document.head.removeChild(document.head.lastChild);
+    document.head.appendChild(style);
 	chrome.bookmarks.getChildren(bid, children => {
 		var index = 0, isUpdate = false;
 		if(!children) 
@@ -54,16 +58,28 @@ function createPanel(bid, parentId) {
 		if(parentId)
 			_parent[bid] = parentId;
 		
-		var panel = $('<div class="panel"></div>'), ul = $('<table></table>').appendTo(panel);
+		var panel = $('<div class="panel" id="panel"></div>'), ul = $('<table></table>').appendTo(panel);
+		var ignoreSep = false;
 		for(let i = 0; i < children.length; i++) {
 			let c = children[i];
 			
-			if(c.index !== index) {
+			if(c.type == "separator") {
 				let li = $('<tr><td colspan="3"><div class="splitter"></div></td></tr>');
-				ul.append(li);
+				if(ignoreSep === true) {
+					continue;
+				} else {
+					ul.append(li);
+				};
 				index++;
-			}
-			//if(c.url.startsWith("place:")) continue;
+				continue;
+			} else {
+				ignoreSep = false;
+			};
+
+			if((c.type == "bookmark") && c.url.startsWith("place:")) {
+				ignoreSep = true;
+			    continue;
+			};
 			let arwstr = !c.url ? '<img src="imgs/arrow.png" alt="">' : '',
 				title = c.title !== '' ? escapeHtml(c.title) : c.url,
 				note = title + "\r\n" + (c.url || ''),
@@ -121,28 +137,20 @@ function createPanel(bid, parentId) {
 		
 		let pw = panel.outerWidth(), ph = panel.outerHeight();
 		if(ph > 595) {
-			panel.find('td.arrow').css('padding-right', 28);
+			panel.find('td.arrow').css('padding-right', 20);
 			pw = panel.outerWidth();
 		}
 		if(_parent[bid]) {
-			panel.children('table').css('padding-left', 30);
+			panel.children('table').css('padding-left', 20);
 			let rtn = $('<div class="return_box"><img src="imgs/return.png" alt=""></div>').appendTo(panel);
-			if(ph > 40) 
-				rtn.css({'top': ph / 4, 'height': ph / 2});
-			else 
-				rtn.css({'top': 0, 'height': ph});
+			rtn.css({'top': 0, 'height': ph});
 			rtn.children('img').css('margin-top', (rtn.height() - 13) / 2);
 			pw = panel.outerWidth();
 			rtn.click(() => {
 				createPanel(_parent[bid], null);
 			});
 		}
-		_container.width(pw + 4).height(ph + 2);
-
-		style = document.createElement('style');
-        style.innerHTML = _pop_css;
-        document.head.removeChild(document.head.lastChild);
-        document.head.appendChild(style);
+		_container.width(pw).height(ph);
 	});
 }
 
@@ -242,9 +250,10 @@ function substituteFavicon(url) {
 
 //-------------
 
-chrome.storage.local.get(['list', 'setting'], (d) => {
-	_saveList = d['list'] || {};
-	setSetting(d['setting']);
-	createPanel(_pop_topId, null);
+document.addEventListener('DOMContentLoaded', function() {
+	chrome.storage.local.get(['list', 'setting'], (d) => {
+		_saveList = d['list'] || {};
+		setSetting(d['setting']);
+		createPanel(_pop_topId, null);
+	})
 });
-
