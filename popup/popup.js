@@ -62,7 +62,7 @@ function createPanel(bid, parentId) {
 		var ignoreSep = false;
 		for(let i = 0; i < children.length; i++) {
 			let c = children[i];
-			
+
 			if(c.type == "separator") {
 				let li = $('<tr><td colspan="3"><div class="splitter"></div></td></tr>');
 				if(ignoreSep === true) {
@@ -82,8 +82,9 @@ function createPanel(bid, parentId) {
 			};
 			let arwstr = !c.url ? '<img src="imgs/arrow.png" alt="">' : '',
 				title = c.title !== '' ? escapeHtml(c.title) : c.url,
-				note = title + "\r\n" + (c.url || ''),
-				li = $('<tr><td class="icon"></td><td class="title" title="'+ note +'"><span>'+ title +'</span></td><td class="arrow">'+ arwstr +'</td></tr>');
+				note = title + "\r\n" + (c.url || '');
+			title = arwstr != '' ? '<b>' + title + '</b>' : title;
+			let li = $('<tr><td class="icon"></td><td class="title" title="'+ note +'"><span>'+ title +'</span></td><td class="arrow">'+ arwstr +'</td></tr>');
 			li.data(_bmKey, c);
 			
 			let sbm = _saveList[c.id];
@@ -97,7 +98,7 @@ function createPanel(bid, parentId) {
 				li.find('td.icon').append(icon);
 				isUpdate = true;
 			}
-						
+
 			li.click(function() {
 				let bm = $(this).data(_bmKey);
 				if(bm.url) {
@@ -127,7 +128,7 @@ function createPanel(bid, parentId) {
 			ul.append(li);
 			index++;
 		}
-		
+
 		if(children.length === 0) {
 			ul.append('<tr><td class="icon"></td><td class="title"><span class="empty">' + chrome.i18n.getMessage("empty") + '</span></td><td class="arrow"></td></tr>');
 		}
