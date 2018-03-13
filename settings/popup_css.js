@@ -1,4 +1,5 @@
-let popup_css = 'html, body {\n\
+var popup_css = '/* This is the default style. */\n\
+html, body {\n\
     margin: 0px; padding: 0px;\n\
     overflow: hidden;\n\
 }\n\
@@ -9,7 +10,7 @@ let popup_css = 'html, body {\n\
 .panel {\n\
     width: fit-content;\n\
     height: fit-content;\n\
-    background-color: #efefef;\n\
+    background-color: #ffffff;\n\
     position:absolute; top: 0; left: 0;\n\
     font-size: 12px; padding: 0 0 0 0;\n\
     user-select: none;\n\
@@ -17,6 +18,8 @@ let popup_css = 'html, body {\n\
     -webkit-user-select: none;\n\
     overflow-x: hidden; overflow-y: auto;\n\
     max-height: 590px;\n\
+    max-width: 400px;\n\
+    min-width: 400px;\n\
 }\n\
 table {\n\
     border-spacing: 0px;\n\
@@ -43,8 +46,8 @@ td.title span {\n\
     overflow: hidden;\n\
     text-overflow: ellipsis;\n\
     cursor: default;\n\
-    max-width: 500px;\n\
-    min-width: 125px;\n\
+    max-width: 369px;\n\
+    min-width: 369px;\n\
 }\n\
 tr:hover {\n\
     background-color: #bbbbff20;\n\

@@ -7,9 +7,9 @@ html, body {
     background-color: #f2f2f2;
 }
 .panel {
-	width: fit-content;
-	height: fit-content;
-    background-color: #efefef;
+    width: fit-content;
+    height: fit-content;
+    background-color: #ffffff;
     position:absolute; top: 0; left: 0;
     font-size: 12px; padding: 0 0 0 0;
     user-select: none;
@@ -17,6 +17,8 @@ html, body {
     -webkit-user-select: none;
     overflow-x: hidden; overflow-y: auto;
     max-height: 590px;
+    max-width: 400px;
+    min-width: 400px;
 }
 table {
     border-spacing: 0px;
@@ -44,8 +46,8 @@ td.title span {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: default;
-    max-width: 500px;
-    min-width: 125px;
+    max-width: 369px;
+    min-width: 369px;
 }
 tr:hover {
     background-color: #bbbbff20;
