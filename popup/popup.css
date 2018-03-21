@@ -2,10 +2,12 @@ html, body {
     margin: 0px; padding: 0px;
     overflow: hidden;
 }
+/* Contains a panel */
 #container {
     border: 0 solid #888;
     background-color: #f2f2f2;
 }
+/* Pop-up list of bookmarks by itself */
 .panel {
     width: fit-content;
     height: fit-content;
@@ -20,6 +22,20 @@ html, body {
     max-width: 400px;
     min-width: 400px;
 }
+/* Top toolbar with the settings button */
+.toolbar {
+    height: 20px;
+    margin: 0px;
+    background-color: #dddddd;
+}
+/* The settings button on toolbar */
+.toolbar img {
+    float: right;
+    width: 20px;
+    height: inherit;
+    padding": 2px;
+}
+/* Pop-up list of bookmarks is represented as a table. Every row matches a bookmark, or a folder. Every row contains 3 columns: an icon, a title, and optionally arrow's image (for folder items). */
 table {
     border-spacing: 0px;
     margin: 0px; padding: 0px;
@@ -30,15 +46,26 @@ td {
 td * {
     vertical-align: middle;
 }
+/* An arrow's image in folder item */
 td.arrow {
     padding: 1px 5px 1px 1px;
 }
-td.icon img {
+/* Bookmark icon */
+td.icon img,
+td.subfolder-icon img {
     border: none; width: 14px; height: 14px;
     margin-top: -1px;
 }
-
-td.title span {
+/* Item icon in subfolder */
+td.subfolder-icon img {
+    margin-left: 14px; /* Attention: this parameter is bound with width of the `div.return_box` */
+}
+/* Item title */
+td.title span,
+td.folder span,
+/* Subfolder item title */
+td.subfolder-title span,
+td.subfolder span {
     font-family: "Arial", sans;
     display: inline-block;
     margin-right: 5px;
@@ -49,24 +76,38 @@ td.title span {
     max-width: 369px;
     min-width: 369px;
 }
+/* Folder title */
+td.folder span {
+    font-weight: bold;
+}
+/* Subfolder title */
+td.subfolder span {
+    font-weight: bold;
+}
+/* Actives when you hover mouse pointer on item */
 tr:hover {
     background-color: #bbbbff20;
 }
+/* Horizontal line, that separates list items */
 div.splitter {
     width: inherit; height: 1px; background-color: #d7d7d7;
     margin: 0 0 0 0;
 }
+/* A block on left side in subfolders for returning to parent folder */
 div.return_box {
-    position:fixed; left: 0px; width: 20px;
+    position:fixed; left: 0px; width: 14px;
     background-color: #fbfbfb; border: 0px solid #c0c0c0;
     border-left: none;
 }
+/* Actives when you hover mouse pointer on the return box */
 div.return_box:hover {
     background-color: #badeff;
 }
+/* This sets style of arrow's image in the return box */
 div.return_box img {
-    margin-left: 7px;
+    margin-left: 4px;
 }
+/* An empty item (with `...`) */
 span.empty {
     color: #aaa;
 }

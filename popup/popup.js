@@ -1,4 +1,4 @@
-var _toolbarId = 'toolbar_____';
+var _toolbarId = 'unfiled_____';
 var _defFavicon = 'imgs/default_favicon.png';
 var _spinFavicon = 'imgs/spin.svg';
 var _saveList = null;
@@ -10,6 +10,7 @@ var _pop_topId = _toolbarId;
 var _pop_newTab = true;
 var _pop_css = null;
 
+//var _needUpdate = true;
 
 function setSetting(setting) {
 	if(setting) {
@@ -46,11 +47,12 @@ var escapeHtml = (function (String) {
 	};
 }(String));
 
-function createPanel(bid, parentId) {
-	style = document.createElement('style');
-    style.innerHTML = _pop_css;
-    document.head.removeChild(document.head.lastChild);
-    document.head.appendChild(style);
+function createPanel(bid, parentId, isSubFolder=false) {
+	//if (!_needUpdate) return;
+	var style = document.createElement('style');
+  style.innerHTML = _pop_css;
+  document.head.removeChild(document.head.lastChild);
+  document.head.appendChild(style);
 	chrome.bookmarks.getChildren(bid, children => {
 		var index = 0, isUpdate = false;
 		if(!children) 
@@ -58,7 +60,15 @@ function createPanel(bid, parentId) {
 		if(parentId)
 			_parent[bid] = parentId;
 		
-		var panel = $('<div class="panel" id="panel"></div>'), ul = $('<table></table>').appendTo(panel);
+		var panel = $('<div class="panel" id="panel"></div>');
+		var settingsDiv = $('<div class="toolbar"></div>');
+		//settingsDiv.css({ "height": "20px", "margin": "1px", "background-color": "#dddddd" });
+		var settingsBtn = $('<img src="imgs/settings.png">');
+		//settingsBtn.css({ "float": "right", "width": "20px", "height": "inherit", "padding": "2px" });
+		settingsBtn.click(() => { chrome.runtime.openOptionsPage(); window.close(); });
+		settingsBtn.appendTo(settingsDiv);
+		settingsDiv.appendTo(panel);
+		var ul = $('<table></table>').appendTo(panel);
 		var ignoreSep = false;
 		for(let i = 0; i < children.length; i++) {
 			let c = children[i];
@@ -83,19 +93,35 @@ function createPanel(bid, parentId) {
 			let arwstr = !c.url ? '<img src="imgs/arrow.png" alt="">' : '',
 				title = c.title !== '' ? escapeHtml(c.title) : c.url,
 				note = title + "\r\n" + (c.url || '');
-			title = arwstr != '' ? '<b>' + title + '</b>' : title;
-			let li = $('<tr><td class="icon"></td><td class="title" title="'+ note +'"><span>'+ title +'</span></td><td class="arrow">'+ arwstr +'</td></tr>');
+			var title_class;
+			var icon_class = "icon";
+			if(arwstr != '') {
+				if(isSubFolder) {
+					title_class = "subfolder";
+					icon_class = "subfolder-icon";
+				} else {
+					title_class = "folder";
+				}
+			} else {
+				if(isSubFolder) {
+					title_class = "subfolder-title";
+					icon_class = "subfolder-icon";
+				} else {
+					title_class = "title";
+				}
+			}
+			let li = $(`<tr><td class="${icon_class}"></td><td class="${title_class}" title="` + note + '"><span>' + title + '</span></td><td class="arrow">' + arwstr + '</td></tr>');
 			li.data(_bmKey, c);
 			
 			let sbm = _saveList[c.id];
 			if(sbm && sbm.url === c.url) {
 				let icon = $('<img src="'+ sbm.faviconUrl +'" alt="">');
 				icon[0].onerror = function() { this.onerror = null; this.src = _defFavicon; };
-				li.find('td.icon').append(icon);
+				li.find(`td.${icon_class}`).append(icon);
 			} else {
 				let icon = $('<img src="'+ _spinFavicon +'" alt="">');
 				setFavicon(icon, c, false);
-				li.find('td.icon').append(icon);
+				li.find(`td.${icon_class}`).append(icon);
 				isUpdate = true;
 			}
 
@@ -107,8 +133,7 @@ function createPanel(bid, parentId) {
 					else
 						chrome.tabs.update({url: bm.url});
 					window.close();
-				} else
-					createPanel(bm.id, bid);
+				} else createPanel(bm.id, bid, true);
 			})
 			.mousedown(function(e) {
 				if(e.which === 3) {
@@ -130,7 +155,7 @@ function createPanel(bid, parentId) {
 		}
 
 		if(children.length === 0) {
-			ul.append('<tr><td class="icon"></td><td class="title"><span class="empty">' + chrome.i18n.getMessage("empty") + '</span></td><td class="arrow"></td></tr>');
+			ul.append('<tr><td class="icon"></td><td class="subfolder-title"><span class="empty">' + chrome.i18n.getMessage("empty") + '</span></td><td class="arrow"></td></tr>');
 		}
 
 		_container.empty();
@@ -138,17 +163,17 @@ function createPanel(bid, parentId) {
 		
 		let pw = panel.outerWidth(), ph = panel.outerHeight();
 		if(ph > 595) {
-			panel.find('td.arrow').css('padding-right', 20);
+			//panel.find('td.arrow').css('padding-right', 20);
 			pw = panel.outerWidth();
 		}
 		if(_parent[bid]) {
-			panel.children('table').css('padding-left', 20);
+			//panel.children('table').css('padding-left', 20);
 			let rtn = $('<div class="return_box"><img src="imgs/return.png" alt=""></div>').appendTo(panel);
 			rtn.css({'top': 0, 'height': ph});
 			rtn.children('img').css('margin-top', (rtn.height() - 13) / 2);
 			pw = panel.outerWidth();
 			rtn.click(() => {
-				createPanel(_parent[bid], null);
+				createPanel(_parent[bid], null, (_parent[bid] === _pop_topId) ? false : true );
 			});
 		}
 		_container.width(pw).height(ph);
@@ -183,12 +208,6 @@ function setFavicon(img, bookmark, noTimeout) {
 	
 	var sp = bookmark.url.split('/');
 	if(sp.length < 3) return setIcon(_defFavicon);
-	
-	var substitute = substituteFavicon(sp[2]);
-	if(substitute) {
-		setIcon(substitute);
-		return;
-	}
 	
 	if(!noTimeout) {
 		setTimeout(() => {
@@ -242,13 +261,6 @@ function setFavicon(img, bookmark, noTimeout) {
 	});
 }
 
-function substituteFavicon(url) {
-	if(url.indexOf('www.amazon.co') >= 0 ) {
-		return 'imgs/favicon/amazon.ico';
-	}
-	return false;
-}
-
 //-------------
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -258,3 +270,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		createPanel(_pop_topId, null);
 	})
 });
+
+/*function listener(message) {
+	if (message === "update!") {
+		_needUpdate = true;
+		createPanel(_pop_topId, null);
+		_needUpdate = false;
+	}
+}
+
+chrome.runtime.onMessage.addListener(listener);*/

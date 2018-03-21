@@ -37,7 +37,7 @@ function setFolderList() {
 		addBookmarkItem(tops, 0);
 		
 		let select = $('#topId');
-		for (bmf of _bookmarkFolders) {
+		for (var bmf of _bookmarkFolders) {
 			select.append('<option value="'+ bmf.id +'">'+ bmf.title +'</option>');
 		}
 		
@@ -47,7 +47,7 @@ function setFolderList() {
 	});
 
 	function addBookmarkItem(bookmarks, index) {
-		for (bm of bookmarks) {
+		for (var bm of bookmarks) {
 			if(!bm.url && bm.children) {
 				_bookmarkFolders.push({id: bm.id, title: '　'.repeat(index) + bm.title});
 				addBookmarkItem(bm.children, index + 1);
@@ -72,3 +72,11 @@ $('select, input').on('change', () => save());
 $('#revertCss').on('click', () => revertCss());
 $('#saveCss').on('click', () => save());
 restore();
+
+/*function settingsListener(changes, area) {
+  if (area === "local") {
+    chrome.runtime.sendMessage("update!");
+  }
+}
+
+chrome.storage.onChanged.addListener(settingsListener);*/
