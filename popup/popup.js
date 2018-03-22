@@ -1,4 +1,4 @@
-var _toolbarId = 'unfiled_____';
+var _toolbarId = 'toolbar_____';
 var _defFavicon = 'imgs/default_favicon.png';
 var _spinFavicon = 'imgs/spin.svg';
 var _saveList = null;
