@@ -1,4 +1,14 @@
 {
+    "auto_open": {
+        "message": "Автоматически открывать папку при наведении указателя \"мыши\".",
+        "description": "Setting HTML text."
+    },
+
+    "auto_open_pause": {
+        "message": "Пауза перед автоматическим открытием папки (в миллисекундах: 1 с = 1000 мс): ",
+        "description": "Setting HTML text."
+    },
+
     "bookmarks": {
         "message": "Закладки",
         "description": "Описание для кнопки в панели дополнений."

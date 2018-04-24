@@ -9,14 +9,25 @@ var _bmKey = 'bookmark_key';
 var _pop_topId = _toolbarId;
 var _pop_newTab = true;
 var _pop_css = null;
+var _pop_autoOpen = true;
+var _pop_autoOpenPause = 1000;
+
+var _onItemFocusTimeoutId = null;
+var _onReturnBoxFocusTimeoutId = null;
 
 //var _needUpdate = true;
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 function setSetting(setting) {
 	if(setting) {
 		_pop_topId = setting.topId !== null ? setting.topId : _toolbarId;
 		_pop_newTab = setting.newTab;
 		_pop_css = setting.css.replace("\n", ";");
+		_pop_autoOpen = setting.autoOpen;
+		_pop_autoOpenPause = isNumeric(setting.autoOpenPause) ? setting.autoOpenPause : _pop_autoOpenPause;
 	}
 }
 
@@ -62,9 +73,7 @@ function createPanel(bid, parentId, isSubFolder=false) {
 		
 		var panel = $('<div class="panel" id="panel"></div>');
 		var settingsDiv = $('<div class="toolbar"></div>');
-		//settingsDiv.css({ "height": "20px", "margin": "1px", "background-color": "#dddddd" });
 		var settingsBtn = $('<img src="imgs/settings.png">');
-		//settingsBtn.css({ "float": "right", "width": "20px", "height": "inherit", "padding": "2px" });
 		settingsBtn.click(() => { chrome.runtime.openOptionsPage(); window.close(); });
 		settingsBtn.appendTo(settingsDiv);
 		settingsDiv.appendTo(panel);
@@ -93,35 +102,35 @@ function createPanel(bid, parentId, isSubFolder=false) {
 			let arwstr = !c.url ? '<img src="imgs/arrow.png" alt="">' : '',
 				title = c.title !== '' ? escapeHtml(c.title) : c.url,
 				note = title + "\r\n" + (c.url || '');
-			var title_class;
-			var icon_class = "icon";
+			var titleClass;
+			var iconClass = "icon";
 			if(arwstr != '') {
 				if(isSubFolder) {
-					title_class = "subfolder";
-					icon_class = "subfolder-icon";
+					titleClass = "subfolder";
+					iconClass = "subfolder-icon";
 				} else {
-					title_class = "folder";
+					titleClass = "folder";
 				}
 			} else {
 				if(isSubFolder) {
-					title_class = "subfolder-title";
-					icon_class = "subfolder-icon";
+					titleClass = "subfolder-title";
+					iconClass = "subfolder-icon";
 				} else {
-					title_class = "title";
+					titleClass = "title";
 				}
 			}
-			let li = $(`<tr><td class="${icon_class}"></td><td class="${title_class}" title="` + note + '"><span>' + title + '</span></td><td class="arrow">' + arwstr + '</td></tr>');
+			let li = $(`<tr><td class="${iconClass}"></td><td class="${titleClass}" title="` + note + '"><span>' + title + '</span></td><td class="arrow">' + arwstr + '</td></tr>');
 			li.data(_bmKey, c);
 			
 			let sbm = _saveList[c.id];
 			if(sbm && sbm.url === c.url) {
 				let icon = $('<img src="'+ sbm.faviconUrl +'" alt="">');
 				icon[0].onerror = function() { this.onerror = null; this.src = _defFavicon; };
-				li.find(`td.${icon_class}`).append(icon);
+				li.find(`td.${iconClass}`).append(icon);
 			} else {
 				let icon = $('<img src="'+ _spinFavicon +'" alt="">');
 				setFavicon(icon, c, false);
-				li.find(`td.${icon_class}`).append(icon);
+				li.find(`td.${iconClass}`).append(icon);
 				isUpdate = true;
 			}
 
@@ -137,7 +146,8 @@ function createPanel(bid, parentId, isSubFolder=false) {
 			})
 			.mousedown(function(e) {
 				if(e.which === 3) {
-					let icon = $(this).find('td.icon img');
+					let icon = $(this).find(`td.${iconClass} img`);
+					console.log(icon);
 					icon[0].src = 'imgs/spin.svg';
 					setFavicon(icon, $(this).data(_bmKey), true);
 				}
@@ -148,7 +158,19 @@ function createPanel(bid, parentId, isSubFolder=false) {
 					if(bm.url)
 						chrome.tabs.create({url: bm.url});
 				}
-			});
+			})
+			.mouseenter(function(e, self=li) {
+				if (!_pop_autoOpen) return;
+				_onItemFocusTimeoutId = setTimeout(function() {
+					let bm = $(self).data(_bmKey);
+					if(!bm.url) createPanel(bm.id, bid, true);
+				}, _pop_autoOpenPause);
+			})
+      .mouseleave(function(e) {
+				if (!_pop_autoOpen) return;
+        clearTimeout(_onItemFocusTimeoutId);
+      });
+;
 			
 			ul.append(li);
 			index++;
@@ -174,7 +196,17 @@ function createPanel(bid, parentId, isSubFolder=false) {
 			pw = panel.outerWidth();
 			rtn.click(() => {
 				createPanel(_parent[bid], null, (_parent[bid] === _pop_topId) ? false : true );
-			});
+			})
+			.mouseenter(function(e) {
+				if (!_pop_autoOpen) return;
+				_onReturnBoxFocusTimeoutId = setTimeout(function() {
+					createPanel(_parent[bid], null, (_parent[bid] === _pop_topId) ? false : true );
+				}, _pop_autoOpenPause);
+			})
+      .mouseleave(function(e) {
+				if (!_pop_autoOpen) return;
+        clearTimeout(_onReturnBoxFocusTimeoutId);
+      });
 		}
 		_container.width(pw).height(ph);
 	});

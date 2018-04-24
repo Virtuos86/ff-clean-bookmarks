@@ -26,7 +26,7 @@ html, body {\n\
 /* Top toolbar with the settings button */\n\
 .toolbar {\n\
     height: 20px;\n\
-    margin: 0px;\n\
+    margin: 1px;\n\
     background-color: #dddddd;\n\
 }\n\
 /* The settings button on toolbar */\n\
@@ -34,7 +34,7 @@ html, body {\n\
     float: right;\n\
     width: 20px;\n\
     height: inherit;\n\
-    padding": 2px;\n\
+    padding: 2px;\n\
 }\n\
 /* Pop-up list of bookmarks is represented as a table. Every row matches a bookmark, or a folder. Every row contains 3 columns: an icon, a title, and optionally arrow`s image (for folder items). */\n\
 table {\n\
@@ -67,7 +67,7 @@ td.folder span,\n\
 /* Subfolder item title */\n\
 td.subfolder-title span,\n\
 td.subfolder span {\n\
-    font-family: "Arial", sans;\n\
+    font-family: Ubuntu, "Droid Sans";\n\
     display: inline-block;\n\
     margin-right: 5px;\n\
     white-space: nowrap;\n\

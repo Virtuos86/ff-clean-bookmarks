@@ -8,7 +8,9 @@ function restore() {
 			$('#newTab').prop('checked', d.setting.newTab);
 			if (!d.setting.css.length) {
 				$('#css').val(popup_css);
-			} else { $('#css').val(d.setting.css) };
+			} else { $('#css').val(d.setting.css); };
+			$('#autoOpen').prop('checked', d.setting.autoOpen);
+			$('#autoOpenPause').val(d.setting.autoOpenPause || '1000');
 		}
 		setFolderList();
 	});
@@ -16,9 +18,11 @@ function restore() {
 
 function save() {
 	var a = {
-		'topId': $('#topId').val(),
-		'newTab': $('#newTab').prop('checked'),
-		'css': $('#css').val()
+		topId: $('#topId').val(),
+		newTab: $('#newTab').prop('checked'),
+		css: $('#css').val(),
+		autoOpen: $('#autoOpen').prop('checked'),
+		autoOpenPause: $('#autoOpenPause').val()
 	};
 	chrome.storage.local.set({'setting': a});
 }
@@ -59,6 +63,8 @@ function setFolderList() {
 var gm = n => chrome.i18n.getMessage(n);
 $('#settings').text(gm('settings'));
 $('#popup_folder').text(gm('popup_folder'));
+$('#auto_open').text(gm('auto_open'));
+$('#auto_open_pause').text(gm('auto_open_pause'));
 $('#open_in_new_tab').text(gm('open_in_new_tab'));
 $('#notes').text(gm('notes'));
 $('#update_favicon').text(gm('update_favicon'));

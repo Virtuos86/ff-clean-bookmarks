@@ -1,4 +1,14 @@
 {
+    "auto_open": {
+        "message": "Automatically open the folder when you hover the mouse pointer.",
+        "description": "Setting HTML text."
+    },
+
+    "auto_open_pause": {
+        "message": "Pause before automatically opening the folder (in milliseconds: 1 s = 1000 ms): ",
+        "description": "Setting HTML text."
+    },
+
     "bookmarks": {
         "message": "Bookmarks",
         "description": "Description for the button."
